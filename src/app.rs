@@ -7,7 +7,7 @@ use cosmic::iced::{Limits, Subscription, window::Id};
 use cosmic::iced_widget::{column, container, row, scrollable};
 use cosmic::iced_winit::commands::popup::{destroy_popup, get_popup};
 use cosmic::prelude::*;
-use cosmic::widget;
+use cosmic::widget::{self, Space};
 use cosmic_ext_applet_dict::{Entry, fetch_words};
 
 #[derive(Default)]
@@ -87,10 +87,10 @@ impl cosmic::Application for AppModel {
                 .on_input(move |value| Message::SearchInput(value.clone()))
                 .on_submit(move |_| Message::Search)
                 .padding([6, 10]),
-            widget::Space::new(5, 0),
+            Space::new().width(5),
             widget::button::icon(widget::icon::from_name("system-search-symbolic"))
                 .on_press(Message::Search),
-            widget::Space::new(5, 0),
+            Space::new().width(5),
             widget::button::icon(widget::icon::from_name("media-playlist-shuffle-symbolic"))
                 .on_press(Message::Random),
         )));
@@ -99,7 +99,7 @@ impl cosmic::Application for AppModel {
         let mut entries_list = widget::column().padding(8).spacing(0);
 
         if !self.entries.is_empty() {
-            content_list = content_list.push(widget::Space::new(0, 10));
+            content_list = content_list.push(Space::new().height(10));
             for entry in &self.entries {
                 let mut entry_content = column!(widget::text::title4(&entry.word),);
 
@@ -193,7 +193,7 @@ impl cosmic::Application for AppModel {
         Task::none()
     }
 
-    fn style(&self) -> Option<cosmic::iced_runtime::Appearance> {
+    fn style(&self) -> Option<cosmic::iced::theme::Style> {
         Some(cosmic::applet::style())
     }
 }
