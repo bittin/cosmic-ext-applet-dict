@@ -64,7 +64,8 @@
       <description>
         <p>0.2.0</p>
         <ul>
-          <li>libcosmic rebase</li>
+            <li>Rebased to the latest libcosmic (lots of under the hood changes and optimisations!)</li>
+            <li>New app and store translations - thank you, bittin and Dymkom</li>
         </ul>
       </description>
     </release>
