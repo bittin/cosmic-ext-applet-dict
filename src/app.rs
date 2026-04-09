@@ -3,11 +3,14 @@
 use crate::config::Config;
 use crate::fl;
 use cosmic::cosmic_config::{self, CosmicConfigEntry};
-use cosmic::iced::{Limits, Subscription, window::Id};
-use cosmic::iced_widget::{column, container, row, scrollable};
-use cosmic::iced_winit::commands::popup::{destroy_popup, get_popup};
+use cosmic::iced::{
+    Limits, Subscription,
+    platform_specific::shell::commands::popup::{destroy_popup, get_popup},
+    window::Id,
+};
 use cosmic::prelude::*;
 use cosmic::widget::{self, Space};
+use cosmic::widget::{column, container, row, scrollable};
 use cosmic_ext_applet_dict::{Entry, fetch_words};
 
 #[derive(Default)]
@@ -79,7 +82,7 @@ impl cosmic::Application for AppModel {
     }
 
     fn view_window(&self, _id: Id) -> Element<'_, Self::Message> {
-        let mut content_list = widget::column().padding(8).spacing(0);
+        let mut content_list = widget::column([]).padding(8).spacing(0);
 
         // search
         content_list = content_list.push(container(row!(
@@ -96,7 +99,7 @@ impl cosmic::Application for AppModel {
         )));
 
         // build entries in scrollable list
-        let mut entries_list = widget::column().padding(8).spacing(0);
+        let mut entries_list = widget::column([]).padding(8).spacing(0);
 
         if !self.entries.is_empty() {
             content_list = content_list.push(Space::new().height(10));
